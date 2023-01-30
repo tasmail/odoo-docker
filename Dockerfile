@@ -21,7 +21,7 @@ RUN apt update \
   && awk '! /^ *(#|$)/' /opt/sources/apt.txt | xargs -r apt install -yq
 
 # Install PostgreSQL 10
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >> /etc/apt/sources.list.d/pgdg.list \
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' >> /etc/apt/sources.list.d/pgdg.list \
   && curl -so - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
   && apt update && apt install -yq postgresql-client-10
 
