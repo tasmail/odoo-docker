@@ -1,4 +1,4 @@
-FROM arm64/ubuntu:18.04
+FROM ubuntu:18.04
 MAINTAINER Elico Corp <webmaster@elico-corp.com> Andrii Tkachenko <tas.gma@gmail.com>
 
 # Define build constants
