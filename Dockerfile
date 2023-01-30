@@ -46,6 +46,12 @@ ADD auto_addons /opt/odoo/auto_addons
 
 User 0
 
+# Install postgresql-client
+RUN apt update && apt install -yq lsb-release
+RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+RUN apt update && apt install -yq postgresql-client libpq-dev
+
 # Install Odoo python dependencies
 RUN pip3 install -r /opt/odoo/sources/odoo/requirements.txt
 
@@ -59,12 +65,6 @@ ADD https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmlto
 RUN apt update \
   && apt install -yq xfonts-base xfonts-75dpi \
   && dpkg -i /opt/sources/wkhtmltox.deb
-
-# Install postgresql-client
-RUN apt update && apt install -yq lsb-release
-RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-RUN apt update && apt install -yq postgresql-client libpq-dev
 
 
 # Startup script for custom setup
